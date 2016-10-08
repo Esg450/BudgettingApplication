@@ -17,6 +17,14 @@ public class TransactionUI extends javax.swing.JFrame {
     public TransactionUI() {
         initComponents();
     }
+    
+    TransactionController transactionController;
+    
+    public TransactionUI( TransactionController transactionController) {
+        this.transactionController = transactionController; 
+        initComponents();
+       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +110,12 @@ public class TransactionUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
+        double amount = Double.parseDouble(this.amount.getText());
+        String name = this.name.getText();
+        String type = this.type.getText();
+        
+        transactionController.add(amount,name,type);
+        
     }//GEN-LAST:event_saveActionPerformed
 
     private void amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountActionPerformed

@@ -10,7 +10,11 @@ public class BudgettingApplication {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        
+        //test to show transaction UI
+        TransactionController controller = new TransactionController();
+        
     }
     
 }
