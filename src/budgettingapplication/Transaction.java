@@ -14,13 +14,11 @@ import java.util.Date;
 public class Transaction {
     private String name;
     private double amount;
-    private String type;
     private Date date; 
 
-    public Transaction(String name, double amount, String type, Date date) {
+    public Transaction(String name, double amount, Date date) {
         this.name = name;
         this.amount = amount;
-        this.type = type;
         this.date = date;
     }
 
@@ -40,13 +38,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+  
 
     public Date getDate() {
         return date;

@@ -30,7 +30,7 @@ public class TransactionController {
     public void add(double amount, String name, String type)
     {
         Date today = new Date();
-        Transaction temp = new Transaction(name,amount,type,today);
+        Transaction temp = new Transaction(name,amount,today);
         
         //TO DO add transaction to budget
         
