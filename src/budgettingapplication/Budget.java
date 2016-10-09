@@ -5,14 +5,19 @@
  */
 package budgettingapplication;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ykawa
  */
 public class Budget {
-     private String name;
+    private String name;
     private double cap;
     private String type;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
+
+  
      
 
     public Budget(String name, double cap, String type) {
@@ -44,6 +49,14 @@ public class Budget {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+      public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
     }
     
     

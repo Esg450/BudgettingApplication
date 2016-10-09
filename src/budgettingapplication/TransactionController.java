@@ -27,7 +27,7 @@ public class TransactionController {
        
     }
     
-    public void add(double amount, String name, String type)
+    public void add(double amount, String name)
     {
         Date today = new Date();
         Transaction temp = new Transaction(name,amount,today);

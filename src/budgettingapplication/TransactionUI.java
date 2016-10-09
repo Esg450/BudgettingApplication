@@ -38,10 +38,8 @@ public class TransactionUI extends javax.swing.JFrame {
         save = new javax.swing.JButton();
         amount = new javax.swing.JTextField();
         amountLabel = new javax.swing.JLabel();
-        type = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Transaction");
@@ -61,9 +59,7 @@ public class TransactionUI extends javax.swing.JFrame {
 
         amountLabel.setText("Amount:");
 
-        jLabel1.setText("Type:");
-
-        jLabel2.setText("Name:");
+        nameLabel.setText("Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,12 +73,10 @@ public class TransactionUI extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(amountLabel)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(nameLabel))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(type)
                     .addComponent(amount))
                 .addContainerGap(173, Short.MAX_VALUE))
         );
@@ -92,16 +86,12 @@ public class TransactionUI extends javax.swing.JFrame {
                 .addContainerGap(62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(nameLabel))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(amountLabel))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(73, 73, 73)
+                .addGap(126, 126, 126)
                 .addComponent(save)
                 .addContainerGap())
         );
@@ -112,9 +102,9 @@ public class TransactionUI extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         double amount = Double.parseDouble(this.amount.getText());
         String name = this.name.getText();
-        String type = this.type.getText();
+     
         
-        transactionController.add(amount,name,type);
+        transactionController.add(amount,name);
         
     }//GEN-LAST:event_saveActionPerformed
 
@@ -160,10 +150,8 @@ public class TransactionUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amount;
     private javax.swing.JLabel amountLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField name;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JButton save;
-    private javax.swing.JTextField type;
     // End of variables declaration//GEN-END:variables
 }
