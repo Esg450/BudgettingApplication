@@ -1,5 +1,7 @@
 package budgettingapplication;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author evangentis
@@ -9,12 +11,15 @@ public class User {
     private String lName;
     private String email;
     private int pin;
+    private ArrayList<Budget> budgets = new ArrayList<>();
     
     public User() {
         this.fName = "John";
         this.lName = "Doe";
         this.email = "john.doe@email.email";
         this.pin = 1234;
+        budgets.add(new Budget("Food Budget for July",500,"Food"));
+        
     }
     
     public User(String f, String l, String e, int p) {
@@ -79,6 +84,16 @@ public class User {
     public void setPin(int pin) {
         this.pin = pin;
     }
+
+    public ArrayList<Budget> getBudgets() {
+        return budgets;
+    }
+
+    public void setBudgets(ArrayList<Budget> budgets) {
+        this.budgets = budgets;
+    }
+    
+    
     
     
 }

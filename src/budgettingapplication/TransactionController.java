@@ -5,6 +5,7 @@
  */
 package budgettingapplication;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,27 +13,56 @@ import java.util.Date;
  * @author dylankolson
  */
 public class TransactionController {
-    
+    TransactionUI theTransactionUI;
     public TransactionController()
     {
-        this.showLoginUI();
+       // this.showLoginUI();
         
     }
     
     
-    public void showLoginUI()
+    public void showTransactionUI()
     {
-        TransactionUI theTransactionUI = new TransactionUI(this);
+        theTransactionUI = new TransactionUI(this);
         theTransactionUI.setVisible(true);
        
     }
     
-    public void add(double amount, String name)
+    public void add(double amount, String name, String budgetName)
     {
         Date today = new Date();
         Transaction temp = new Transaction(name,amount,today);
         
-        //TO DO add transaction to budget
         
+        //get the budget to add the transaction to
+        UserController u = new UserController();
+        User person = u.getUser();
+        ArrayList<Budget> budgets = person.getBudgets();
+        Budget b = null;
+        for(int i = 0; i < budgets.size(); i++)
+        {
+            if(budgets.get(i).getName().equals(budgetName))
+            {
+                b = budgets.get(i);
+            }
+        }
+        
+        if(b != null)
+        {
+            ArrayList<Transaction> t = b.getTransactions();
+            t.add(temp);
+            b.setTransactions(t);
+        }
+        
+        System.out.println("Transaction Saved to "  + budgetName);
+        
+    }
+    
+    
+    public void getMainMenu()
+    {
+        theTransactionUI.setVisible(false);
+        DashboardController dash = new DashboardController();
+        dash.showDashboardUI();
     }
 }

@@ -10,6 +10,7 @@ package budgettingapplication;
  * @author ykawa
  */
 public class BudgetController {
+   
         public BudgetController()
     {
         this.showLoginUI();
@@ -29,7 +30,7 @@ public class BudgetController {
       
         Budget temp = new Budget(name,amount,type);
         
-        //TO DO add transaction to budget
+        
         
     }
 }

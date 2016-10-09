@@ -11,22 +11,29 @@ package budgettingapplication;
  */
 public class UserController {
     private User user;
+    LoginUI loginWin = new LoginUI(this);
     
     public UserController() {
         this.user = new User();
     }
     
     public void showLogin() {
-        LoginUI loginWin = new LoginUI(this);
+        
         loginWin.setVisible(true);
     }
     
     public void showDash() {
         DashboardController dash = new DashboardController();
         dash.showDashboardUI();
+        loginWin.setVisible(false);
     }
     
     public boolean checkPin(int p) {
         return this.user.getPin() == p;
+    }
+    
+    public User getUser()
+    {
+        return user;
     }
 }

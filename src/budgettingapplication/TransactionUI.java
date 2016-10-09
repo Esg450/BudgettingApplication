@@ -5,6 +5,8 @@
  */
 package budgettingapplication;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author dak5332 dylankolson
@@ -23,7 +25,21 @@ public class TransactionUI extends javax.swing.JFrame {
     public TransactionUI( TransactionController transactionController) {
         this.transactionController = transactionController; 
         initComponents();
+        setUpComboBox();
        
+    }
+    
+    public void setUpComboBox()
+    {
+        UserController u = new UserController();
+        User theUser = u.getUser();
+        
+        ArrayList<Budget> budgets = theUser.getBudgets();
+        for(int i = 0; i <budgets.size(); i++)
+        {
+            budget.addItem(budgets.get(i).getName());
+        }
+        
     }
 
     /**
@@ -40,6 +56,9 @@ public class TransactionUI extends javax.swing.JFrame {
         amountLabel = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
+        budget = new javax.swing.JComboBox<>();
+        budgetLabel = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Transaction");
@@ -61,24 +80,46 @@ public class TransactionUI extends javax.swing.JFrame {
 
         nameLabel.setText("Name:");
 
+        budget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                budgetActionPerformed(evt);
+            }
+        });
+
+        budgetLabel.setText("Budget:");
+
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(save)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(amountLabel)
-                    .addComponent(nameLabel))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(amount))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(amountLabel)
+                            .addComponent(nameLabel)
+                            .addComponent(budgetLabel))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                .addComponent(amount)))
+                        .addGap(0, 167, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(back)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(save)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,8 +132,14 @@ public class TransactionUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(amountLabel))
-                .addGap(126, 126, 126)
-                .addComponent(save)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(budgetLabel))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save)
+                    .addComponent(back))
                 .addContainerGap())
         );
 
@@ -102,15 +149,25 @@ public class TransactionUI extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         double amount = Double.parseDouble(this.amount.getText());
         String name = this.name.getText();
+        String budgetName = this.budget.getSelectedItem().toString();
+        
      
         
-        transactionController.add(amount,name);
+        transactionController.add(amount,name,budgetName);
         
     }//GEN-LAST:event_saveActionPerformed
 
     private void amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_amountActionPerformed
+
+    private void budgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_budgetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_budgetActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+       transactionController.getMainMenu();
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +207,9 @@ public class TransactionUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amount;
     private javax.swing.JLabel amountLabel;
+    private javax.swing.JButton back;
+    private javax.swing.JComboBox<String> budget;
+    private javax.swing.JLabel budgetLabel;
     private javax.swing.JTextField name;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton save;

@@ -13,7 +13,7 @@ public class DashboardController {
     
     public DashboardController()
     {
-        this.showDashboardUI();
+        //this.showDashboardUI();
         
     }
     
@@ -23,6 +23,8 @@ public class DashboardController {
         theDashboardUI.setVisible(true);
        
     }
+    
+ 
     
     
 }
