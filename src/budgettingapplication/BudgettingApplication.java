@@ -13,8 +13,11 @@ public class BudgettingApplication {
         
         
         //test to show transaction UI
-        TransactionController controller = new TransactionController();
+        //TransactionController controller = new TransactionController();
         
+        //Test to show login
+        UserController user = new UserController();
+        user.showLogin();
     }
     
 }
