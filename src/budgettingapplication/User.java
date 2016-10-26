@@ -10,7 +10,7 @@ public class User {
     private String fName;
     private String lName;
     private String email;
-    private int pin;
+    private int pin; 
     private ArrayList<Budget> budgets = new ArrayList<>();
     
     public User() {

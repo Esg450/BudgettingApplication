@@ -5,6 +5,8 @@
  */
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author Evan
@@ -18,7 +20,7 @@ public class UserController {
     }
     
     public void showLogin() {
-        
+         
         loginWin.setVisible(true);
     }
     
@@ -35,5 +37,12 @@ public class UserController {
     public User getUser()
     {
         return user;
+    }
+    
+    public void save() throws FileNotFoundException
+    {
+        SaveController save =  new SaveController();
+        save.save(this);
+        
     }
 }
