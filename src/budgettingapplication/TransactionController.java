@@ -60,7 +60,10 @@ public class TransactionController {
         }
         
         System.out.println("Transaction Saved to "  + budgetName);
-        u.save();
+        //u.save();
+        
+        SaveController s = new SaveController();
+        s.addTrans(budgetName, temp);
         
     }
     

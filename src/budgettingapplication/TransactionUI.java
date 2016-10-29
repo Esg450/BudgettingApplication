@@ -5,7 +5,10 @@
  */
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -153,7 +156,11 @@ public class TransactionUI extends javax.swing.JFrame {
         
      
         
-        transactionController.add(amount,name,budgetName);
+        try {
+            transactionController.add(amount,name,budgetName);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TransactionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_saveActionPerformed
 
