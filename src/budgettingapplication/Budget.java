@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author ykawa
  */
 public class Budget {
-    private String name;
+    private String name;  
     private double cap;
     private String type;
     private ArrayList<Transaction> transactions = new ArrayList<>();

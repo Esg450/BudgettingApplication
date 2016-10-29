@@ -5,8 +5,12 @@
  */
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -20,6 +24,7 @@ public class TransactionUI extends javax.swing.JFrame {
     public TransactionUI() {
         initComponents();
         initCustomComponents();
+         setUpComboBox();
     }
     
     TransactionController transactionController;
@@ -208,7 +213,11 @@ public class TransactionUI extends javax.swing.JFrame {
         String st[]={name,Double.toString(amount),budgetName};
         mod.addRow(st);
         
-        transactionController.add(amount,name,budgetName);
+        try {
+            transactionController.add(amount,name,budgetName);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TransactionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_saveActionPerformed
 

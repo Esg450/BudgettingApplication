@@ -5,6 +5,8 @@
  */
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author ykawa

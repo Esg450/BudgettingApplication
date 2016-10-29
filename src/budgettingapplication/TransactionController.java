@@ -5,6 +5,7 @@
  */
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class TransactionController {
        
     }
     
-    public void add(double amount, String name, String budgetName)
+    public void add(double amount, String name, String budgetName) throws FileNotFoundException
     {
         Date today = new Date();
         Transaction temp = new Transaction(name,amount,today);
@@ -50,11 +51,19 @@ public class TransactionController {
         if(b != null)
         {
             ArrayList<Transaction> t = b.getTransactions();
+            for(Transaction a: t)
+            { 
+                System.out.print(a.getName());
+            }
             t.add(temp);
             b.setTransactions(t);
         }
         
         System.out.println("Transaction Saved to "  + budgetName);
+        //u.save();
+        
+        SaveController s = new SaveController();
+        s.addTrans(budgetName, temp);
         
     }
     
