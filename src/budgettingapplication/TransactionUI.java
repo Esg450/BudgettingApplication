@@ -6,7 +6,12 @@
 package budgettingapplication;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -239,6 +244,33 @@ public class TransactionUI extends javax.swing.JFrame {
         mod.addColumn("name");
         mod.addColumn("amount");
         mod.addColumn("budget");
+        
+        Scanner in = null;
+        try {
+            in = new Scanner(new FileReader("save.csv"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TransactionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         in.useDelimiter(",|\\n");
+        String bname = in.next();
+         in.useDelimiter("");
+        String budget = in.nextLine();
+        in.nextLine();
+        ArrayList<Transaction> list = new ArrayList();
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
+        in.useDelimiter(",|\\n");
+        while(in.hasNextLine())
+        {
+            
+            String name = in.next();
+            double amount =  in.nextDouble();
+            
+            String day = in.next();
+            System.out.println(in.nextLine());
+            
+            String st[]={name,Double.toString(amount),bname};
+            mod.addRow(st);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
