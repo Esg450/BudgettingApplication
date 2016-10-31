@@ -27,7 +27,7 @@ public class SaveController {
         this.save_trans();
     }
     
-    private void save_user() throws FileNotFoundException {
+    public void save_user() throws FileNotFoundException {
         try (PrintWriter out = new PrintWriter("save_user.csv")) {
             out.println(this.user.getfName());
             out.println(this.user.getlName());
@@ -37,7 +37,7 @@ public class SaveController {
         
     }
     
-    private void save_trans() throws FileNotFoundException {
+    public void save_trans() throws FileNotFoundException {
         try (PrintWriter out = new PrintWriter("save_budget.csv")) {
             ArrayList<Budget> budgets = user.getBudgets();
             

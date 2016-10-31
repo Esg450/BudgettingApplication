@@ -55,7 +55,11 @@ public class DashboardUI extends javax.swing.JFrame {
         });
 
         jButton3.setText("Edit Settings");
-        jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Transaction Dashboard");
         jButton4.setEnabled(false);
@@ -101,6 +105,12 @@ public class DashboardUI extends javax.swing.JFrame {
         transcontrol.showTransactionUI();
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        SettingsController settings = new SettingsController(this.DashboardController.getUser());
+        settings.showSettings();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

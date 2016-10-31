@@ -29,7 +29,7 @@ public class LoadController {
         
     }
     
-    private void load_user() throws FileNotFoundException, ParseException {
+    public void load_user() throws FileNotFoundException, ParseException {
         Scanner in = new Scanner(new FileReader("save_user.csv"));
         
         String fname = in.nextLine();
@@ -40,7 +40,7 @@ public class LoadController {
         this.user = new User(fname, lname, email, pin);
     }
     
-    private void load_budget() throws FileNotFoundException, ParseException {
+    public void load_budget() throws FileNotFoundException, ParseException {
         Scanner in = new Scanner(new FileReader("save_budget.csv"));
         String budget = in.nextLine();
         in.nextLine();

@@ -104,5 +104,8 @@ public class User {
         
     }
     
-    
+    public void save_user() throws FileNotFoundException {
+        SaveController save =  new SaveController(this);
+        save.save_user();
+    }
 }
