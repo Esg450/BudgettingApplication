@@ -15,8 +15,8 @@ public class UserController {
     private User user;
     LoginUI loginWin = new LoginUI(this);
     
-    public UserController() {
-        this.user = new User();
+    public UserController(User u) {
+        this.user = u;
     }
     
     public void showLogin() {
@@ -25,7 +25,7 @@ public class UserController {
     }
     
     public void showDash() {
-        DashboardController dash = new DashboardController();
+        DashboardController dash = new DashboardController(this.user);
         dash.showDashboardUI();
         loginWin.setVisible(false);
     }
@@ -37,12 +37,5 @@ public class UserController {
     public User getUser()
     {
         return user;
-    }
-    
-    public void save() throws FileNotFoundException
-    {
-        SaveController save =  new SaveController();
-        save.save(this);
-        
     }
 }

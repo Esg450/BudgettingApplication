@@ -15,16 +15,18 @@ import java.util.Date;
  */
 public class TransactionController {
     TransactionUI theTransactionUI;
-    public TransactionController()
+    User user;
+    public TransactionController(User u)
     {
        // this.showLoginUI();
+        this.user = u;
         
     }
     
     
     public void showTransactionUI()
     {
-        theTransactionUI = new TransactionUI(this);
+        theTransactionUI = new TransactionUI(this, this.user);
         theTransactionUI.setVisible(true);
        
     }
@@ -36,8 +38,7 @@ public class TransactionController {
         
         
         //get the budget to add the transaction to
-        UserController u = new UserController();
-        User person = u.getUser();
+        User person = this.user;
         ArrayList<Budget> budgets = person.getBudgets();
         Budget b = null;
         for(int i = 0; i < budgets.size(); i++)
@@ -62,7 +63,7 @@ public class TransactionController {
         System.out.println("Transaction Saved to "  + budgetName);
         //u.save();
         
-        SaveController s = new SaveController();
+        SaveController s = new SaveController(this.user);
         s.addTrans(budgetName, temp);
         
     }
@@ -71,7 +72,7 @@ public class TransactionController {
     public void getMainMenu()
     {
         theTransactionUI.setVisible(false);
-        DashboardController dash = new DashboardController();
+        DashboardController dash = new DashboardController(this.user);
         dash.showDashboardUI();
     }
 }

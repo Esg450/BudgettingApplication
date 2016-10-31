@@ -10,10 +10,11 @@ package budgettingapplication;
  * @author katiebradley
  */
 public class DashboardController {
-    
-    public DashboardController()
+    private User user;
+    public DashboardController(User u)
     {
         //this.showDashboardUI();
+        this.user = u;
         
     }
     
@@ -22,6 +23,11 @@ public class DashboardController {
         DashboardUI theDashboardUI = new DashboardUI(this);
         theDashboardUI.setVisible(true);
        
+    }
+    
+    public User getUser() {
+        
+        return this.user;
     }
     
  

@@ -1,5 +1,6 @@
 package budgettingapplication;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +28,8 @@ public class User {
         this.lName = l;
         this.email = e;
         this.pin = p;
+        budgets.add(new Budget("Food Budget for July",500,"Food"));
+
     }
 
     /**
@@ -93,7 +96,13 @@ public class User {
         this.budgets = budgets;
     }
     
-    
+        
+    public void save() throws FileNotFoundException
+    {
+        SaveController save =  new SaveController(this);
+        save.save();
+        
+    }
     
     
 }

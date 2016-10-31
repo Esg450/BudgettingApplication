@@ -20,16 +20,28 @@ import java.util.Scanner;
  */
 public class LoadController {
     
-    private User user; 
-    public LoadController(UserController u)
-    {
-        user = u.getUser();
-    }
-    
+    private User user;
     
     public void load() throws FileNotFoundException, ParseException
     {
-        Scanner in = new Scanner(new FileReader("save.csv"));
+        this.load_user();
+        this.load_budget();
+        
+    }
+    
+    private void load_user() throws FileNotFoundException, ParseException {
+        Scanner in = new Scanner(new FileReader("save_user.csv"));
+        
+        String fname = in.nextLine();
+        String lname = in.nextLine();
+        String email = in.nextLine();
+        int pin = Integer.parseInt(in.nextLine());
+        
+        this.user = new User(fname, lname, email, pin);
+    }
+    
+    private void load_budget() throws FileNotFoundException, ParseException {
+        Scanner in = new Scanner(new FileReader("save_budget.csv"));
         String budget = in.nextLine();
         in.nextLine();
         ArrayList<Transaction> list = new ArrayList();
@@ -53,9 +65,15 @@ public class LoadController {
         
        
         
-        user.getBudgets().get(0).setTransactions(list);
+        this.user.getBudgets().get(0).setTransactions(list);
             
         
+        
+    }
+    
+    public User getUser() {
+        
+        return this.user;
     }
     
             

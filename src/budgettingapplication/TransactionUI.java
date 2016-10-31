@@ -33,9 +33,10 @@ public class TransactionUI extends javax.swing.JFrame {
     }
     
     TransactionController transactionController;
-    
-    public TransactionUI( TransactionController transactionController) {
+    User user;
+    public TransactionUI( TransactionController transactionController, User u) {
         this.transactionController = transactionController; 
+        this.user = u;
         initComponents();
         setUpComboBox();
        
@@ -43,8 +44,7 @@ public class TransactionUI extends javax.swing.JFrame {
     
     public void setUpComboBox()
     {
-        UserController u = new UserController();
-        User theUser = u.getUser();
+        User theUser = this.user;
         
         ArrayList<Budget> budgets = theUser.getBudgets();
         for(int i = 0; i <budgets.size(); i++)

@@ -16,11 +16,30 @@ import java.util.Scanner;
  * @author dak5332
  */
 public class SaveController {
-
-    public void save(UserController userController) throws FileNotFoundException {
-        try (PrintWriter out = new PrintWriter("save.csv")) {
-            User u = userController.getUser();
-            ArrayList<Budget> budgets = u.getBudgets();
+    private User user;
+    
+    public SaveController(User u) {
+        this.user = u;
+    }
+    
+    public void save() throws FileNotFoundException {
+        this.save_user();
+        this.save_trans();
+    }
+    
+    private void save_user() throws FileNotFoundException {
+        try (PrintWriter out = new PrintWriter("save_user.csv")) {
+            out.println(this.user.getfName());
+            out.println(this.user.getlName());
+            out.println(this.user.getEmail());
+            out.println(this.user.getPin());
+        }
+        
+    }
+    
+    private void save_trans() throws FileNotFoundException {
+        try (PrintWriter out = new PrintWriter("save_budget.csv")) {
+            ArrayList<Budget> budgets = user.getBudgets();
             
             String budgetObject = null;
             for(Budget b : budgets)
@@ -38,12 +57,11 @@ public class SaveController {
             }
             out.println(budgetObject);
         }
-
     }
     
     public void addTrans(String bName,Transaction t) throws FileNotFoundException
     {
-        Scanner in = new Scanner(new FileReader("save.csv"));
+        Scanner in = new Scanner(new FileReader("save_budget.csv"));
         String budget = in.nextLine();
         String oldTrans = "";
         while(in.hasNextLine())
@@ -51,7 +69,7 @@ public class SaveController {
             oldTrans += in.nextLine() + "\n";
         }
         in.close();
-        PrintWriter out = new PrintWriter("save.csv");
+        PrintWriter out = new PrintWriter("save_budget.csv");
         out.println(budget);
         out.print(oldTrans);
         out.print(t.getName() + "," + t.getAmount() + "," + t.getDate() + "\n");
