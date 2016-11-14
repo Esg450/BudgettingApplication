@@ -11,18 +11,20 @@ import java.io.FileNotFoundException;
  *
  * @author ykawa
  */
+
 public class BudgetController {
-   
-        public BudgetController()
+   BudgetUI theBudgetUI; 
+   User user;
+        public BudgetController(User u)
     {
-        this.showLoginUI();
-        
+        //this.showLoginUI();
+        this.user = u;
     }
     
     
     public void showLoginUI()
     {
-        BudgetUI theBudgetUI = new BudgetUI(this);
+         theBudgetUI = new BudgetUI(this);
         theBudgetUI.setVisible(true);
        
     }
@@ -37,6 +39,8 @@ public class BudgetController {
     }
 
     void getMainMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         theBudgetUI.setVisible(false);
+        DashboardController dash = new DashboardController(this.user);
+        dash.showDashboardUI();
     }
 }
