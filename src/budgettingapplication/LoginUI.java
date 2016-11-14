@@ -21,6 +21,7 @@ public class LoginUI extends javax.swing.JFrame {
     public LoginUI(UserController c) {
         initComponents();
         this.controller = c;
+        this.setLocationRelativeTo(null);
     }
 
     private LoginUI() {

@@ -20,6 +20,7 @@ public class SettingsUI extends javax.swing.JFrame {
     public SettingsUI(SettingsController aThis) {
         initComponents();
         this.controller = aThis;
+        this.setLocationRelativeTo(null);
 
     }
 

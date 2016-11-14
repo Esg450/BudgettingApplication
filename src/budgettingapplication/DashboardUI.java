@@ -23,6 +23,7 @@ public class DashboardUI extends javax.swing.JFrame {
     public DashboardUI(DashboardController dash) {
         this.DashboardController = dash;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.

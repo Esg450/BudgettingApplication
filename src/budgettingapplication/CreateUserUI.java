@@ -21,6 +21,8 @@ public class CreateUserUI extends javax.swing.JFrame {
     public CreateUserUI(CreateUserController c) {
         initComponents();
         this.controller = c;
+        this.setLocationRelativeTo(null);
+      
     }
 
     private CreateUserUI() {

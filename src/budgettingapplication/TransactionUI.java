@@ -29,7 +29,14 @@ public class TransactionUI extends javax.swing.JFrame {
     public TransactionUI() {
         initComponents();
         initCustomComponents();
-         setUpComboBox();
+        setUpComboBox();
+        this.setLocationRelativeTo(null);
+       
+    }
+    
+    public void setLocation(){
+        
+        setLocationRelativeTo(null);
     }
     
     TransactionController transactionController;
@@ -39,7 +46,7 @@ public class TransactionUI extends javax.swing.JFrame {
         this.user = u;
         initComponents();
         setUpComboBox();
-       
+        this.setLocationRelativeTo(null);
     }
     
     public void setUpComboBox()
@@ -63,7 +70,9 @@ public class TransactionUI extends javax.swing.JFrame {
     
     private void initCustomComponents(){
         
-        
+        setSize (700, 500);
+        setResizable(false);
+        setLocationRelativeTo(null);    
         
     }
     
