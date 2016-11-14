@@ -95,7 +95,7 @@ public class DashboardUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BudgetController bcontrol = new BudgetController();
+        BudgetController bcontrol = new BudgetController(this.DashboardController.getUser());
         bcontrol.showLoginUI();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
