@@ -17,11 +17,8 @@ public class CreateUserController {
     
     public void createUser(String f, String l, String e, int p) {
         User u = new User(f, l, e, p);
-        try {
-            u.save();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SaveController s = new SaveController(u);
+        s.setup_db();
         createUser.setVisible(false);
         UserController controller = new UserController(u);
         controller.showLogin();

@@ -5,14 +5,13 @@
  */
 package budgettingapplication;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
+import java.sql.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
+
 
 /**
  *
@@ -21,55 +20,77 @@ import java.util.Scanner;
 public class LoadController {
     
     private User user;
+    private Connection c;
     
-    public void load() throws FileNotFoundException, ParseException
-    {
+    public LoadController() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+    public void load() {
         this.load_user();
         this.load_budget();
-        
     }
     
-    public void load_user() throws FileNotFoundException, ParseException {
-        Scanner in = new Scanner(new FileReader("save_user.csv"));
+    public void load_user() {
+        Statement stmt = null;
         
-        String fname = in.nextLine();
-        String lname = in.nextLine();
-        String email = in.nextLine();
-        int pin = Integer.parseInt(in.nextLine());
+        String fname = null;
+        String lname = null;
+        String email = null;
+        int pin = 0;
+        
+        try {
+          c = DriverManager.getConnection("jdbc:sqlite:budgetApp.db");
+          c.setAutoCommit(false);
+          stmt = c.createStatement();
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM USER;" );
+          while (rs.next()) {
+              fname = rs.getString("FNAME");
+              lname = rs.getString("LNAME");
+              email = rs.getString("EMAIL");
+              pin = rs.getInt("PIN");
+          }
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        }
         
         this.user = new User(fname, lname, email, pin);
     }
     
-    public void load_budget() throws FileNotFoundException, ParseException {
-        Scanner in = new Scanner(new FileReader("save_budget.csv"));
-        String budget = in.nextLine();
-        in.nextLine();
+    public void load_budget() {
+
+        Statement stmt = null;
         ArrayList<Transaction> list = new ArrayList();
-        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
-        in.useDelimiter(",|\\n");
-        while(in.hasNextLine())
-        {
-            
-            String name = in.next();
-            double amount =  in.nextDouble();
-            
-            String day = in.next();
-   
-            Date date = df.parse(day);
-            
-            //System.out.println(name + "," + amount + "," + date);
-            list.add(new Transaction(name,amount,date));
-            System.out.println(in.nextLine());
-            
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:budgetApp.db");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM TRANS;" );
+            while (rs.next()) {
+                String name = rs.getString("NAME");
+                double amount = rs.getDouble("AMOUNT");
+                Date date = df.parse(rs.getString("DATE"));
+                
+                list.add(new Transaction(name, amount, date));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         }
         
-       
-        
         this.user.getBudgets().get(0).setTransactions(list);
-            
-        
-        
-    }
+   }
     
     public User getUser() {
         

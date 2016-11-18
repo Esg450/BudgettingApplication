@@ -5,7 +5,6 @@
  */
 package budgettingapplication;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,7 +30,7 @@ public class TransactionController {
        
     }
     
-    public void add(double amount, String name, String budgetName) throws FileNotFoundException
+    public void add(double amount, String name, String budgetName)
     {
         Date today = new Date();
         Transaction temp = new Transaction(name,amount,today);

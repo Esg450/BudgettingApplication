@@ -5,15 +5,8 @@
  */
 package budgettingapplication;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -227,11 +220,8 @@ public class TransactionUI extends javax.swing.JFrame {
         String st[]={name,Double.toString(amount),budgetName};
         mod.addRow(st);
         
-        try {
-            transactionController.add(amount,name,budgetName);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TransactionUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        transactionController.add(amount,name,budgetName);
+
         
     }//GEN-LAST:event_saveActionPerformed
 
@@ -254,31 +244,15 @@ public class TransactionUI extends javax.swing.JFrame {
         mod.addColumn("amount");
         mod.addColumn("budget");
         
-        Scanner in = null;
-        try {
-            in = new Scanner(new FileReader("save.csv"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TransactionUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         in.useDelimiter(",|\\n");
-        String bname = in.next();
-         in.useDelimiter("");
-        String budget = in.nextLine();
-        in.nextLine();
-        ArrayList<Transaction> list = new ArrayList();
-        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
-        in.useDelimiter(",|\\n");
-        while(in.hasNextLine())
-        {
-            
-            String name = in.next();
-            double amount =  in.nextDouble();
-            
-            String day = in.next();
-            System.out.println(in.nextLine());
-            
-            String st[]={name,Double.toString(amount),bname};
-            mod.addRow(st);
+        for (Budget b : transactionController.user.getBudgets()) { 
+            for (Transaction t : b.getTransactions()) {
+                System.out.println(t.getName());
+                String name = t.getName();
+                double amount = t.getAmount();
+                Date day = t.getDate();
+                String st[]={name,Double.toString(amount), b.getName()};
+                mod.addRow(st);
+            }
         }
     }//GEN-LAST:event_formWindowOpened
 
