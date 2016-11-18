@@ -44,7 +44,10 @@ public class TransactionUI extends javax.swing.JFrame {
     
     public void setUpComboBox()
     {
-        User theUser = this.user;
+        
+        LoadController l = new LoadController(); 
+        l.loadBudgets();
+        User theUser = l.getUser();
         
         ArrayList<Budget> budgets = theUser.getBudgets();
         for(int i = 0; i <budgets.size(); i++)

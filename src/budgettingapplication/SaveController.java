@@ -154,8 +154,31 @@ public class SaveController {
             System.exit(0);
         }
         
+        
+       
 
     }
+    
+     public void add_budget(Budget b)
+        {
+            
+             Statement stmt = null;
+        
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:budgetApp.db");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            
+               stmt.executeUpdate("INSERT INTO BUDGET(NAME, TYPE, CAP) VALUES ('" +  b.getName() + "', '" + b.getType() + "', " + b.getCap() + ");");
+            
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        }
     
 
 }

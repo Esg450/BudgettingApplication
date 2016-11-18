@@ -33,7 +33,8 @@ public class BudgetController {
     {
       
         Budget temp = new Budget(name,amount,type);
-        
+        SaveController s = new SaveController(this.user);
+        s.add_budget(temp);
         
         
     }

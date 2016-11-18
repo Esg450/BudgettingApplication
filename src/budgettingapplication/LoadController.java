@@ -97,6 +97,42 @@ public class LoadController {
         return this.user;
     }
     
+    
+    
+    public void loadBudgets()
+    {
+         Statement stmt = null;
+        ArrayList<Budget> list = new ArrayList();
+       
+        
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:budgetApp.db");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM BUDGET;" );
+           
+            while (rs.next()) {
+                
+                String name = rs.getString("NAME");
+                String type = rs.getString("TYPE");
+                double cap = rs.getDouble("CAP");
+                
+                list.add(new Budget(name, cap, type));
+               
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        }
+        load_user();
+        this.user.setBudgets(list);
+        
+        
+        
+    }
+    
             
 }
 
