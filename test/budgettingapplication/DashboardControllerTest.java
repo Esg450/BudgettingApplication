@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budgettingapplication;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author katiebradley
+ * @author evangentis
  */
 public class DashboardControllerTest {
     
@@ -26,6 +23,14 @@ public class DashboardControllerTest {
     @AfterClass
     public static void tearDownClass() {
     }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
 
     /**
      * Test of showDashboardUI method, of class DashboardController.
@@ -33,10 +38,22 @@ public class DashboardControllerTest {
     @Test
     public void testShowDashboardUI() {
         System.out.println("showDashboardUI");
-        DashboardController instance = new DashboardController();
+        User u = new User();
+        DashboardController instance = new DashboardController(u);
         instance.showDashboardUI();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getUser method, of class DashboardController.
+     */
+    @Test
+    public void testGetUser() {
+        System.out.println("getUser");
+        User u = new User();
+        User expResult = new User();
+        DashboardController instance = new DashboardController(u);
+        User result = instance.getUser();
+        assertEquals(expResult.getPin(), result.getPin());
     }
     
 }

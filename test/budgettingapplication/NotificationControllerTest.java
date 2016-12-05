@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budgettingapplication;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author katiebradley
+ * @author evangentis
  */
 public class NotificationControllerTest {
     
@@ -26,6 +23,14 @@ public class NotificationControllerTest {
     @AfterClass
     public static void tearDownClass() {
     }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
 
     /**
      * Test of getBudget method, of class NotificationController.
@@ -34,11 +39,9 @@ public class NotificationControllerTest {
     public void testGetBudget() {
         System.out.println("getBudget");
         NotificationController instance = new NotificationController();
-        double expResult = 0.0;
+        double expResult = 11.0;
         double result = instance.getBudget();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -51,8 +54,6 @@ public class NotificationControllerTest {
         int limit = 0;
         NotificationController instance = new NotificationController();
         instance.checkBudget(cap, limit);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
