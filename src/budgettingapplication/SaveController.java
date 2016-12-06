@@ -145,7 +145,7 @@ public class SaveController {
             stmt = c.createStatement();
             
             stmt.executeUpdate("INSERT INTO TRANS(BUDGET_NAME, NAME, AMOUNT, DATE) VALUES ('" + bName + "', '" + t.getName() + "', " + t.getAmount() + ", '" + t.getDate() + "')");
-            
+            System.out.println(bName);
             stmt.close();
             c.commit();
             c.close();

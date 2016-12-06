@@ -33,7 +33,9 @@ public class LoadController {
     }
     public void load() {
         this.load_user();
+        this.loadBudgets();
         this.load_budget();
+        
     }
     
     public void load_user() {
@@ -79,7 +81,18 @@ public class LoadController {
                 String name = rs.getString("NAME");
                 double amount = rs.getDouble("AMOUNT");
                 Date date = df.parse(rs.getString("DATE"));
+                String budget = rs.getString("BUDGET_NAME");
                 
+                for(int i = 0; i < this.user.getBudgets().size(); i++)
+                {
+                    if(this.user.getBudgets().get(i).getName().equals(budget))
+                    {
+                        ArrayList<Transaction> trans = this.user.getBudgets().get(i).getTransactions();
+                        trans.add(new Transaction(name, amount, date));
+                        this.user.getBudgets().get(i).setTransactions(trans);
+                    }
+                }
+            
                 list.add(new Transaction(name, amount, date));
             }
             rs.close();

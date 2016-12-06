@@ -248,6 +248,7 @@ public class TransactionUI extends javax.swing.JFrame {
         mod.addColumn("budget");
         
         for (Budget b : transactionController.user.getBudgets()) { 
+            System.out.println(b.getName());
             for (Transaction t : b.getTransactions()) {
                 System.out.println(t.getName());
                 String name = t.getName();
