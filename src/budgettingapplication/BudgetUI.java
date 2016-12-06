@@ -8,6 +8,7 @@ package budgettingapplication;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,15 +22,15 @@ public class BudgetUI extends javax.swing.JFrame {
     public BudgetUI() {
         initComponents();
     }
-BudgetController BudgetController;
-    
-    public BudgetUI( BudgetController BudgetController) {
-        this.BudgetController = BudgetController; 
+    BudgetController BudgetController;
+
+    public BudgetUI(BudgetController BudgetController) {
+        this.BudgetController = BudgetController;
         initComponents();
-       this.setLocationRelativeTo(null);
-       
-       
+        this.setLocationRelativeTo(null);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,12 +169,19 @@ BudgetController BudgetController;
     }//GEN-LAST:event_BackActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-    double cap = Double.parseDouble(this.CapTF.getText());
-        String name = this.NameTF.getText();
-        String type = this.TypeTF.getText();
-        
-        BudgetController.add(cap,name,type);
-        this.SaveLabel.setText("Budget Saved");
+
+        try {
+            double cap = Double.parseDouble(this.CapTF.getText());
+            String name = this.NameTF.getText();
+            String type = this.TypeTF.getText();
+
+            BudgetController.add(cap, name, type);
+            this.SaveLabel.setText("Budget Saved");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter a number for cap");
+
+        }
     }//GEN-LAST:event_SaveActionPerformed
 
     private void NameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTFActionPerformed
