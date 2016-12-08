@@ -6,9 +6,11 @@
 package budgettingapplication;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,7 +32,7 @@ public class BudgetUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
     }
-
+    DefaultTableModel mod;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +55,11 @@ public class BudgetUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         TypeTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +194,31 @@ public class BudgetUI extends javax.swing.JFrame {
     private void NameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NameTFActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mod = new DefaultTableModel();
+        jTable1.setModel(mod);
+        mod.addColumn("Budget Name");
+        mod.addColumn("Budget Cap");
+        
+
+        for (Budget b : BudgetController.user.getBudgets()) {
+            
+            
+                System.out.println(b.getName());
+                String name = b.getName();
+                
+                
+                
+                double cap = b.getCap();
+             
+                System.out.println(cap);
+                //Date day = t.getDate();
+                String st[] = {name, Double.toString(cap)};
+                mod.addRow(st);
+           
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

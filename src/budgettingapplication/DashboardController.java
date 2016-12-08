@@ -5,12 +5,25 @@
  */
 package budgettingapplication;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author katiebradley
  */
 public class DashboardController {
     private User user;
+    private Connection c;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
+
+    
     public DashboardController(User u)
     {
         //this.showDashboardUI();
@@ -30,7 +43,12 @@ public class DashboardController {
         return this.user;
     }
     
- 
+   
+        
+        
+        
+    }
     
-    
-}
+
+
+

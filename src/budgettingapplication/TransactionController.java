@@ -53,7 +53,8 @@ public class TransactionController {
             ArrayList<Transaction> t = b.getTransactions();
             for(Transaction a: t)
             { 
-                System.out.print(a.getName());
+                //System.out.print(a.getName());
+                System.out.println(a.getAmount());
             }
             t.add(temp);
             b.setTransactions(t);

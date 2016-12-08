@@ -22,6 +22,7 @@ public class BudgettingApplication {
         //Test to show login
         File dbName = new File("budgetApp.db");
         
+        
         if (dbName.exists()) {
             LoadController l = new LoadController();
             l.load();

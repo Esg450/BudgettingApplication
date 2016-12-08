@@ -253,7 +253,12 @@ public class TransactionUI extends javax.swing.JFrame {
             for (Transaction t : b.getTransactions()) {
                 System.out.println(t.getName());
                 String name = t.getName();
+                
+                
+                
                 double amount = t.getAmount();
+             
+                System.out.println(amount);
                 Date day = t.getDate();
                 String st[] = {name, Double.toString(amount), b.getName()};
                 mod.addRow(st);

@@ -5,12 +5,19 @@
  */
 package budgettingapplication;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author katiebradley
  */
 public class DashboardUI extends javax.swing.JFrame {
-
+   
+    
+    ArrayList<Budget> b;
+    ArrayList<Transaction> transaction; 
+    TransactionController transactionController;
+    
     /**
      * Creates new form DashboardUI
      */
@@ -22,9 +29,24 @@ public class DashboardUI extends javax.swing.JFrame {
     
     public DashboardUI(DashboardController dash) {
         this.DashboardController = dash;
+        
+        
+        initCustomComponents();
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public void initCustomComponents(){
+       
+      
+        
+        System.out.println("test");
+    }
+   
+       
+        
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,8 +84,12 @@ public class DashboardUI extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Transaction Dashboard");
-        jButton4.setEnabled(false);
+        jButton4.setText("Dashboard");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,11 +97,12 @@ public class DashboardUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
@@ -87,9 +114,9 @@ public class DashboardUI extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(43, 43, 43)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(jButton4)
-                .addGap(32, 32, 32))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +140,14 @@ public class DashboardUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+       //DashUI thedash = new DashUI();
+        
+        new DashUI(DashboardController).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+     
     /**
      * @param args the command line arguments
      */
