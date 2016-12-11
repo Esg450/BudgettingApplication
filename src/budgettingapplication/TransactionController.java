@@ -30,10 +30,10 @@ public class TransactionController {
        
     }
     
-    public void add(double amount, String name, String budgetName)
+    public void add(double amount, String name, String budgetName, Date date)
     {
-        Date today = new Date();
-        Transaction temp = new Transaction(name,amount,today);
+      
+        Transaction temp = new Transaction(name,amount,date);
         
         
         //get the budget to add the transaction to

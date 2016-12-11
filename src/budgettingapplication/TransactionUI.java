@@ -5,6 +5,7 @@
  */
 package budgettingapplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -41,6 +42,11 @@ public class TransactionUI extends javax.swing.JFrame {
         initComponents();
         setUpComboBox();
         this.setLocationRelativeTo(null);
+
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(today);
+        this.dateTextbox.setText(strDate);
     }
 
     public void setUpComboBox() {
@@ -92,11 +98,13 @@ public class TransactionUI extends javax.swing.JFrame {
         amountLabel = new javax.swing.JLabel();
         nameBox = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
-        budget = new javax.swing.JComboBox<String>();
+        budget = new javax.swing.JComboBox<>();
         budgetLabel = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         budgetTable = new javax.swing.JTable();
+        nameLabel1 = new javax.swing.JLabel();
+        dateTextbox = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Transaction");
@@ -159,31 +167,35 @@ public class TransactionUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(budgetTable);
 
+        nameLabel1.setText("Date:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(amountLabel)
-                .addGap(438, 438, 438))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 48, Short.MAX_VALUE)
+                .addGap(0, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(back)
                     .addComponent(save)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(nameLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(amountBox, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(nameLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dateTextbox)
+                            .addGap(18, 18, 18)
+                            .addComponent(amountLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(amountBox, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(budgetLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -196,7 +208,9 @@ public class TransactionUI extends javax.swing.JFrame {
                     .addComponent(amountLabel)
                     .addComponent(amountBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(budgetLabel)
-                    .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameLabel1)
+                    .addComponent(dateTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(save)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,16 +225,29 @@ public class TransactionUI extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
 
-
         try {
             double amount = Double.parseDouble(this.amountBox.getText());
             String name = this.nameBox.getText();
             String budgetName = this.budget.getSelectedItem().toString();
+            
+            
+            
+            try{
+                
+               String strDate = this.dateTextbox.getText();
+               SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+               Date date = dateFormat.parse(strDate);
+               transactionController.add(amount, name, budgetName,date);
+               
+               String st[] = {name, Double.toString(amount), budgetName, strDate};
+                mod.addRow(st);
+            }
+            catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter a vaild date");
 
-            String st[] = {name, Double.toString(amount), budgetName};
-            mod.addRow(st);
+        }
 
-            transactionController.add(amount, name, budgetName);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please enter a number for amount");
 
@@ -247,6 +274,7 @@ public class TransactionUI extends javax.swing.JFrame {
         mod.addColumn("name");
         mod.addColumn("amount");
         mod.addColumn("budget");
+        mod.addColumn("date");
 
         for (Budget b : transactionController.user.getBudgets()) {
             System.out.println(b.getName());
@@ -254,13 +282,14 @@ public class TransactionUI extends javax.swing.JFrame {
                 System.out.println(t.getName());
                 String name = t.getName();
                 
-                
-                
                 double amount = t.getAmount();
-             
+
                 System.out.println(amount);
                 Date day = t.getDate();
-                String st[] = {name, Double.toString(amount), b.getName()};
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                String strDate = dateFormat.format(day);
+                
+                String st[] = {name, Double.toString(amount), b.getName(),strDate};
                 mod.addRow(st);
             }
         }
@@ -308,9 +337,11 @@ public class TransactionUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> budget;
     private javax.swing.JLabel budgetLabel;
     private javax.swing.JTable budgetTable;
+    private javax.swing.JTextField dateTextbox;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameBox;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel nameLabel1;
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 }
