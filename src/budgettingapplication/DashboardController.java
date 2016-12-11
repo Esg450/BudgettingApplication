@@ -22,7 +22,7 @@ public class DashboardController {
     private User user;
     private Connection c;
     private ArrayList<Transaction> transactions = new ArrayList<>();
-
+    private DashboardUI theDashboardUI;
     
     public DashboardController(User u)
     {
@@ -33,7 +33,7 @@ public class DashboardController {
     
     public void showDashboardUI()
     {
-        DashboardUI theDashboardUI = new DashboardUI(this);
+         theDashboardUI = new DashboardUI(this);
         theDashboardUI.setVisible(true);
        
     }
@@ -45,7 +45,12 @@ public class DashboardController {
     
    
         
-        
+        public void getMainMenu()
+    {
+        theDashboardUI.setVisible(false);
+        DashboardController dash = new DashboardController(this.user);
+        dash.showDashboardUI();
+    }
         
     }
     

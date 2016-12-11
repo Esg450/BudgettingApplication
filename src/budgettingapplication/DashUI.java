@@ -23,6 +23,7 @@ public class DashUI extends javax.swing.JFrame {
     //int amount;
     int percent;
     double totalamount = 0;
+    DashboardController d; 
    
     
     //User user = new User();
@@ -39,8 +40,8 @@ public class DashUI extends javax.swing.JFrame {
     public DashUI(DashboardController controller) {
         
         
-        
-         user = controller.getUser();
+        d = controller;
+        user = controller.getUser();
         ArrayList<Budget> budgets = user.getBudgets();
         initComponents();
         getMax();
@@ -55,6 +56,7 @@ public class DashUI extends javax.swing.JFrame {
         label5.setText(Integer.toString((int) totalamount));
         percent = (int) (totalamount * 100 / max);
         jLabel3.setText(Integer.toString(percent)+ " %");
+        this.setLocationRelativeTo(null);
     }
     
 
@@ -224,8 +226,7 @@ public class DashUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        new DashboardUI().setVisible(true);
-        
+        d.getMainMenu();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
