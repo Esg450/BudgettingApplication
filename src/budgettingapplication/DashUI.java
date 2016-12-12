@@ -20,10 +20,12 @@ public class DashUI extends javax.swing.JFrame {
     String name;
     String name2;
     Date date;
+    String budgetName;
     //int amount;
     int percent;
     double totalamount = 0;
     DashboardController d; 
+    int position;
    
     
     //User user = new User();
@@ -44,39 +46,50 @@ public class DashUI extends javax.swing.JFrame {
         user = controller.getUser();
         ArrayList<Budget> budgets = user.getBudgets();
         initComponents();
-        getMax();
+        //getMax();
         getName();
         getAmount();
+        setUpComboBox();
         jProgressBar1.setValue(value);
-        jProgressBar1.setMaximum(max);
-        label1.setText(name);
-        label2.setText(Integer.toString(max));
+        
+        //label1.setText(name);
+        
         label3.setText("Cap:");
         label4.setText("Used: ");
-        label5.setText(Integer.toString((int) totalamount));
-        percent = (int) (totalamount * 100 / max);
-        jLabel3.setText(Integer.toString(percent)+ " %");
+       
+        
         this.setLocationRelativeTo(null);
+        
     }
     
 
     public int getMax(){
         
        
-        
 
         //get max value for progress bar 
-        max = (int) user.getBudgets().get(0).getCap();
-        name = user.getBudgets().get(0).getName();
+        
+       name = user.getBudgets().get(position).getName();
         
         //System.out.println(max = user.getBudgets().size());
+       // ArrayList<Budget> budgets = user.getBudgets();
+        
+        //name = budgetName;
+        
+        
+        
+       max = (int) user.getBudgets().get(position).getCap();
+        
+        
+            
+            
         
         
         //System.out.println(amount);
         
         //test
-        System.out.println(user.getBudgets().get(0).getCap());
-        System.out.println(user.getBudgets().get(1).getCap());
+       // System.out.println(user.getBudgets().get(0).getCap());
+        //System.out.println(user.getBudgets().get(1).getCap());
         System.out.println(name);
         return max;
         
@@ -86,7 +99,7 @@ public class DashUI extends javax.swing.JFrame {
         
         
 
-        name = user.getBudgets().get(0).getName();
+        name = user.getBudgets().get(position).getName();
        
         return name;
     }
@@ -96,10 +109,14 @@ public class DashUI extends javax.swing.JFrame {
         double amount;
         
         System.out.println("getting amounts...");
-        Budget b = user.getBudgets().get(0);
+        
+        totalamount = 0;
+        
+        Budget b = user.getBudgets().get(position);
         for (Transaction t : b.getTransactions()){
-            
+           
             amount = t.getAmount();
+             System.out.println(amount);
             totalamount = totalamount + amount;
             
             
@@ -113,6 +130,18 @@ public class DashUI extends javax.swing.JFrame {
         
     }
        
+    public void setUpComboBox() {
+
+        LoadController l = new LoadController();
+        l.loadBudgets();
+        User theUser = l.getUser();
+
+        ArrayList<Budget> budgets = theUser.getBudgets();
+        for (int i = 0; i < budgets.size(); i++) {
+            jComboBox1.addItem(budgets.get(i).getName());
+        }
+
+    }
     
     
     
@@ -126,7 +155,6 @@ public class DashUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
-        label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
@@ -135,10 +163,9 @@ public class DashUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        label1.setText("label1");
 
         label2.setText("label2");
 
@@ -161,6 +188,12 @@ public class DashUI extends javax.swing.JFrame {
 
         jLabel2.setText("Dashboard");
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,18 +202,18 @@ public class DashUI extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(19, 19, 19)
                                 .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19)
-                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(76, 76, 76))
+                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
@@ -190,7 +223,7 @@ public class DashUI extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)))
-                        .addGap(19, 34, Short.MAX_VALUE))))
+                        .addGap(19, 81, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
@@ -201,11 +234,12 @@ public class DashUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,6 +263,27 @@ public class DashUI extends javax.swing.JFrame {
         d.getMainMenu();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        System.out.println("this is the name " + jComboBox1.getSelectedItem());
+        
+      budgetName = (String) jComboBox1.getSelectedItem();
+        
+      position = jComboBox1.getSelectedIndex();
+      System.out.println(position); 
+      
+      getMax();
+      
+      label2.setText(Integer.toString(max));
+      jProgressBar1.setMaximum(max);
+      
+      getAmount();
+       label5.setText(Integer.toString((int) totalamount));
+       percent = (int) (totalamount * 100 / max);
+        jLabel3.setText(Integer.toString(percent)+ " %");
+      
+      
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,11 +322,11 @@ public class DashUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JProgressBar jProgressBar1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
