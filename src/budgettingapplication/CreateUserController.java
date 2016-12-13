@@ -15,10 +15,12 @@ public class CreateUserController {
         createUser.setVisible(true);
     }
     
-    public void createUser(String f, String l, String e, int p) {
+    public void createUser(String f, String l, String e, int p, String bName, String bType, double bAmount) {
         User u = new User(f, l, e, p);
+        u.addBudget(bName, bType, bAmount);
         SaveController s = new SaveController(u);
         s.setup_db();
+        s.save();
         createUser.setVisible(false);
         UserController controller = new UserController(u);
         controller.showLogin();

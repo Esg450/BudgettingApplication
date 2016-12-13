@@ -92,7 +92,6 @@ public class LoadController {
                         this.user.getBudgets().get(i).setTransactions(trans);
                     }
                 }
-            
                 list.add(new Transaction(name, amount, date));
             }
             rs.close();

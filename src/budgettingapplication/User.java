@@ -28,10 +28,12 @@ public class User {
         this.lName = l;
         this.email = e;
         this.pin = p;
-        budgets.add(new Budget("Food Budget for July",500,"Food"));
 
     }
 
+    public void addBudget(String n, String t, double a) {
+        this.budgets.add(new Budget(n, a, t));
+    }
     /**
      * @return the fName
      */

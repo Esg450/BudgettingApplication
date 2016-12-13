@@ -6,6 +6,8 @@
 package budgettingapplication;
 
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,12 +33,12 @@ public class BudgetController {
     
     public void add(double amount, String name, String type)
     {
-      
-        Budget temp = new Budget(name,amount,type);
-        SaveController s = new SaveController(this.user);
-        s.add_budget(temp);
-        
-        
+        this.user.addBudget(name, type, amount);        
+       try {
+           this.user.save();
+       } catch (FileNotFoundException ex) {
+           Logger.getLogger(BudgetController.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     void getMainMenu() {

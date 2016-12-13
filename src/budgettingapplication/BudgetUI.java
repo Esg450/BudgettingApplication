@@ -162,6 +162,9 @@ public class BudgetUI extends javax.swing.JFrame {
             String type = this.NameTF.getText();
 
             BudgetController.add(cap, name, type);
+            
+            String st[] = {name, Double.toString(cap)};
+            mod.addRow(st);
             this.SaveLabel.setText("Budget Saved");
 
         } catch (Exception e) {
